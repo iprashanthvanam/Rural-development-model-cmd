@@ -1,40 +1,58 @@
-# Village Development Project
+# Rural Development Model (CMD-Based)
 
 **Full Project Documentation & README**  
 **Last updated:** May 2025  
-**Author:** Prashanth  
-**Location:** Hyderabad, Telangana, India  
+**Author:** Prashanth Vanam  
+**Project Type:** Command Line Application (CMD)  
+**Location:** India  
 
 ---
 
 ## Project Overview
 
-Village Development is a Django-based web application created to assist rural planning and development. It allows users to:
+The **Rural Development Model (CMD)** is a **command-line based Python application** designed to analyze village development data and generate actionable insights for rural planning.
 
-- Enter detailed village information through a web form
-- Automatically generate analytics (growth rate, density, infrastructure score, etc.)
-- Produce rule-based AI recommendations for improvement
-- Create visual 2D maps highlighting existing + recommended infrastructure
-- Generate professionally formatted multi-page PDF reports
+Unlike web-based systems, this project runs entirely through the **terminal/command prompt**, making it lightweight, fast, and suitable for academic demonstrations, research experiments, and data analysis workflows.
 
-The project demonstrates a full-stack rural development planning tool using:
+The system allows users to:
 
-- **Django** (web framework)
-- **PostgreSQL + PostGIS** (spatial database)
-- **GeoPandas + Matplotlib** (static map generation)
-- **ReportLab** (PDF generation)
-- **Rule-based recommendation engine**
+- Input structured village development data
+- Analyze infrastructure, population, and resources
+- Generate development metrics and scores
+- Produce rule-based recommendations
+- Save outputs as reports and analysis files
+
+This project focuses on **logic, data processing, and analytics**, without relying on any web framework.
+
+---
+
+## Key Objectives
+
+- Analyze rural development indicators programmatically
+- Demonstrate data-driven planning through Python
+- Provide a modular and extendable analytics model
+- Enable reproducible results through command-line execution
 
 ---
 
 ## Features
 
-- **Data Entry:** Web form for entering comprehensive village data (demographic, infrastructure, geographic, administrative).
-- **Analytics:** Real-time calculation of key development metrics.
-- **AI Recommendations:** Rule-based suggestions across 9+ categories (infrastructure, education, health, sustainability, etc.).
-- **Mapping:** Static map generation with emoji annotations for existing & suggested facilities.
-- **Reporting:** Multi-page landscape PDF report with header, overview, infrastructure assessment, analysis, recommendations, and declaration.
-- **Reliability:** Robust error handling, logging, and thread-safe Matplotlib usage.
+- **CMD-Based Execution:** Fully runs from terminal / command prompt
+- **Village Data Processing:** Reads structured rural datasets
+- **Development Metrics:**  
+  - Population growth analysis  
+  - Resource availability scoring  
+  - Infrastructure evaluation  
+- **Rule-Based Recommendations:**  
+  - Education  
+  - Healthcare  
+  - Roads & transport  
+  - Water & sanitation  
+  - Sustainability  
+- **Output Generation:**  
+  - Text-based summaries  
+  - Structured result files  
+- **Offline Friendly:** No internet or server required
 
 ---
 
@@ -42,124 +60,65 @@ The project demonstrates a full-stack rural development planning tool using:
 
 | Layer | Technology | Purpose |
 |------|------------|---------|
-| **Backend** | Django 5.2 | Web framework, ORM, views, routing |
-| **Database** | PostgreSQL 15 + PostGIS | Relational + spatial data storage |
-| **Mapping** | GeoPandas, Matplotlib ('Agg') | Static 2D map generation |
-| **PDF Gen** | ReportLab | Professional multi-page PDF reports |
-| **Analytics** | Pure Python + Matplotlib | Metric calculation & bar charts |
-| **Logic** | Rule-based logic | Actionable suggestions |
-| **Logging** | Python logging module | Debug & production monitoring |
+| **Language** | Python 3 | Core logic & analytics |
+| **Execution** | Command Line (CMD) | User interaction |
+| **Data Handling** | CSV / JSON / Python Data Structures | Input & processing |
+| **Logic Engine** | Rule-based Python logic | Recommendations |
+| **Outputs** | Filesystem (text/data files) | Result storage |
 
 ---
 
 
 ---
 
-## Installation & Setup (Step-by-step)
+## Installation & Setup
 
-### 1. Prerequisites
+### 1️⃣ Prerequisites
 
-- Python ≥ 3.11 (recommended: 3.13)
-- PostgreSQL 15+ with PostGIS extension
+- Python ≥ 3.10
 - Git (optional)
-- Virtual environment tool (venv / virtualenv / conda)
+- Command Prompt / Terminal
 
----
-
-### 2. Clone & Enter Project
 
 ```bash
-git clone <your-repo-url>
-cd rural-dev-web/backend
 
-For windows:
+### 2️⃣ Clone the Repository:
+git clone https://github.com/iprashanthvanam/Rural-development-model-cmd.git
+cd Rural-development-model-cmd
+
+### 3️⃣ Create Virtual Environment (Recommended):
+
+### Windows:
 python -m venv venv
 venv\Scripts\activate
 
-For Linux/Mac
+### Linux / macOS:
 python3 -m venv venv
 source venv/bin/activate
 
----
+### 4️⃣ Install Dependencies:
+pip install -r requirements.txt
 
-### 3. Install Dependencies
+### Running the Application (CMD):
+▶ Start the Program
+python manage.py
 
-pip install --upgrade pip
-pip install django==5.2 psycopg2-binary geopandas matplotlib reportlab django-geo shapely
-Simply : pip install -r requirements.txt
+or (if structured differently):
+python rural_dev/main.py
 
----
+### Application Flow
+User runs the program from CMD
+System prompts for village data (or reads from file)
+Analytics engine processes the data
+Metrics are calculated
+Rule-based recommendations are generated
+Results are saved to the outputs/ directory
 
-### 4. Windows (GeoPandas issues – Conda recommended)
+### Sample Outputs:
+Development score summaries
+Infrastructure gap analysis
+Recommendation reports
+Processed datasets
 
-conda create -n rural-dev python=3.11
-conda activate rural-dev
-conda install -c conda-forge geopandas
-pip install django psycopg2-binary matplotlib reportlab django-geo shapely
-
----
-
-### 5. Database Setup
-
-createdb -U postgres village_web_db
-psql -U postgres -d village_web_db -c "CREATE EXTENSION postgis;"
-
-Update rural_dev/settings.py:
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'village_web_db',
-        'USER': 'postgres',
-        'PASSWORD': 'your_password_here',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
-
----
-
-### 6. Apply Migrations
-
-python manage.py makemigrations
-python manage.py migrate
-
-
----
-
-### 7. GeoJSON File Configuration
-
-Place your village GeoJSON file at:
-C:\Users\<your-username>\Downloads\filtered_output.geojson
-
-OR update the path inside:
-village_app/utils/gis.py
-
----
-
-### 8. Run Development Server
-
-python manage.py runserver --insecure
-Open browser:
-👉 http://127.0.0.1:8000/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### All generated files are stored inside:
+outputs/
